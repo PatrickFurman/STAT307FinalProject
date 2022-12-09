@@ -73,15 +73,15 @@ shapiro.test(fit$residuals) # Looks worse, none of the transformations tried hel
 qqnorm(fit$residuals) 
 qqline(fit$residuals)
 
-#Kruskal-Wallis
-kruskal.test(df2$WeightChange~df2$Brand)
-kruskal.test(df2$WeightChange~df2$Shape)
-kruskal.test(df2$WeightChange~df2$Salt)
-
 # Homoscedasticity - all p-values still over 0.05
 leveneTest(aov_fit$residuals~Brand, data=df2)
 leveneTest(aov_fit$residuals~Shape, data=df2)
 leveneTest(aov_fit$residuals~Salt, data=df2)
+
+#Kruskal-Wallis since normality failed for initial and transformations
+kruskal.test(df2$WeightChange~df2$Brand)
+kruskal.test(df2$WeightChange~df2$Shape)
+kruskal.test(df2$WeightChange~df2$Salt)
 
 # Plot of residuals against fitted values
 plot(fit$fitted.values, fit$residuals)
